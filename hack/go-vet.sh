@@ -1,6 +1,15 @@
 #!/bin/sh
 if [ "$IS_CONTAINER" != "" ]; then
   echo "Processing directory $1"
+  cd ..
+  SOURCE_DIR="$(pwd)"
+  cd .. || exit
+  ROOT_DIR="$(pwd)"
+  TARGET_DIR="${ROOT_DIR}/openshift"
+  if [ "$SOURCE_DIR" != "$TARGET_DIR" ]; then
+    mv "$SOURCE_DIR" "$TARGET_DIR"
+  fi;
+  cd "${TARGET_DIR}/installer/" || exit
   go vet "$1"
 else
   for dir in "$@"

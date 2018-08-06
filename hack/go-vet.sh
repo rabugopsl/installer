@@ -3,9 +3,11 @@ if [ "$IS_CONTAINER" != "" ]; then
   echo "Processing directory $1"
   cd ..
   SOURCE_DIR="$(pwd)"
+  echo "$SOURCE_DIR"
   cd .. || exit
   ROOT_DIR="$(pwd)"
   TARGET_DIR="${ROOT_DIR}/openshift"
+  echo "${ROOT_DIR} - - ${TARGET_DIR}"
   if [ "$SOURCE_DIR" != "$TARGET_DIR" ]; then
     mv "$SOURCE_DIR" "$TARGET_DIR"
   fi;
